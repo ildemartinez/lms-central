@@ -1,0 +1,26 @@
+{
+	"info": {
+		"_postman_id": "f6f98a9f-6ce9-4d3d-a07c-bccf9a24965b",
+		"name": "lms-central",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "test",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{host}}/",
+					"host": [
+						"{{host}}"
+					],
+					"path": [
+						""
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}
