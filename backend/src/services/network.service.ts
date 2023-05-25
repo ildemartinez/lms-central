@@ -1,10 +1,10 @@
 import { Injectable } from '@nestjs/common';
 import { LMS } from '../dto/class_lms';
-import { LMSDto } from '../dto/lms.dto';
+import { LMSDto, CourseDto, LMSBasicDto } from '../dto/lms.dto';
 import { HttpService } from '@nestjs/axios/dist';
-import { EMPTY, Observable, catchError, firstValueFrom } from 'rxjs';
+import { EMPTY, Observable } from 'rxjs';
 import { AxiosResponse } from 'axios';
-import { filter, map, mergeMap } from 'rxjs/operators';
+import { map } from 'rxjs/operators';
 
 @Injectable()
 export class NetworkService {
@@ -32,11 +32,24 @@ export class NetworkService {
     });
   }
 
-  getCourses(uid: number): Observable<AxiosResponse<any>> {
-    if (uid < this.fLMSS.length && this.fLMSS[uid].connected == true) {
-      const myFetch = `${this.fLMSS[uid].url}/webservice/rest/server.php?wstoken=${this.fLMSS[uid].token}&moodlewsrestformat=json&wsfunction=core_course_get_categories`;
+  getLMSS(): LMSBasicDto[] {
+    return this.fLMSS.map((res) => {
+      return {
+        connected: res.connected,
+        id: res.id,
+        name: res.name,
+        url: res.url,
+      };
+    });
+  }
 
-      return this.httpService.get(myFetch).pipe(map((res) => res.data));
+  getCourses(uid: number): Observable<CourseDto[]> {
+    if (uid < this.fLMSS.length && this.fLMSS[uid].connected == true) {
+      const myFetch = `${this.fLMSS[uid].url}/webservice/rest/server.php?wstoken=${this.fLMSS[uid].token}&moodlewsrestformat=json&wsfunction=core_course_get_courses`;
+
+      let result = this.httpService.get(myFetch).pipe(map((res) => res.data));
+
+      return result;
     } else return EMPTY;
   }
 }

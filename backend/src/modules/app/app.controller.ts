@@ -7,7 +7,7 @@ import { ApiTags, ApiResponse, ApiOperation } from '@nestjs/swagger';
 export class AppController {
   constructor(private readonly appService: AppService) {}
 
-  /*@Get()
+  @Get()
   @ApiTags(NETWORK_CRUD)
   @ApiOperation({ summary: 'List of LMSS' })
   @ApiResponse({
@@ -16,5 +16,5 @@ export class AppController {
   })
   async getLMSS() {
     return await this.appService.getLMSS();
-  }*/
+  }
 }

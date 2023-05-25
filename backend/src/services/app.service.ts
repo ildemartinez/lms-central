@@ -44,4 +44,8 @@ export class AppService {
 
     return false;
   }
+
+  getLMSS() {
+    return this.networkService.getLMSS();
+  }
 }
