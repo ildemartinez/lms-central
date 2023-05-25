@@ -1,8 +1,9 @@
-import { ILMS } from './interfaces';
+import { LMSDto } from './lms.dto';
 
-export class LMS implements ILMS {
+export class LMS implements LMSDto {
   connected: boolean = false;
-  id: string;
+  name: string;
+  id: number;
   url: string;
   user: string;
   password: string;
@@ -10,13 +11,15 @@ export class LMS implements ILMS {
   token: string;
 
   constructor(
-    id: string,
+    id: number,
+    name: string,
     url: string,
     user: string,
     password: string,
     service: string,
   ) {
     this.id = id;
+    this.name = name;
     this.url = url;
     this.user = user;
     this.password = password;
@@ -35,9 +38,11 @@ export class LMS implements ILMS {
         // it to the `User` type, and return it from the promise
         //return res as User[]
         console.log(`${this.url} connected`);
+        this.connected = true;
         this.token = res.token;
       })
       .catch((error: Error) => {
+        this.connected = false;
         console.log(`${this.url} error`);
         console.log(error);
       });

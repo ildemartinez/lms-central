@@ -1,13 +1,11 @@
 import { Injectable } from '@nestjs/common';
-import { LMS } from './types/class_lms';
+import { NetworkService } from './network.service';
 
 @Injectable()
 export class AppService {
-  fLMSS: LMS[] = [];
-
-  constructor() {
+  constructor(private readonly networkService: NetworkService) {
     if (this.loadConfigFile()) {
-      this.connectLMSNetwork();
+      this.networkService.connectLMSNetwork();
     } else {
       console.log('Error with config.ini file');
     }
@@ -26,15 +24,15 @@ export class AppService {
 
         for (var i = 0; i < keys.length; ++i) {
           if (typeof config[keys[i]] === 'object') {
-            let aLMS = new LMS(
+            this.networkService.addLMS(
+              i,
               keys[i],
               config[keys[i]].url,
               config[keys[i]].user,
               config[keys[i]].password,
               config[keys[i]].service,
             );
-            aLMS.id = keys[i];
-            this.fLMSS.push(aLMS);
+
             console.log('Found ' + keys[i]);
           }
         }
@@ -45,18 +43,5 @@ export class AppService {
     }
 
     return false;
-  }
-
-  connectLMSNetwork() {
-    this.fLMSS.forEach(function (aLMS) {
-      if (!aLMS.connected) {
-        aLMS.connect();
-      }
-    });
-    return JSON.stringify(this.fLMSS);
-  }
-
-  getRoot(): string {
-    return '';
   }
 }
