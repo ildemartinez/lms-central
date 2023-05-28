@@ -8,4 +8,12 @@ export class CoursesService {
   getCourses(uid: number) {
     return this.networkService.getCourses(uid);
   }
+
+  getCategories(uid: number) {
+    return this.networkService.getCategories(uid);
+  }
+
+  getlms() {
+    return this.networkService.getLMSS();
+  }
 }

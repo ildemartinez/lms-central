@@ -6,7 +6,5 @@ export class CourseController {
   constructor(private readonly coursesService: CoursesService) {}
 
   @Get(':id')
-  async getLMSCourses(@Param('id') id: number) {
-    return this.coursesService.getCourses(id);
-  }
+  getLMSCourses(@Param('id') id: number) {}
 }

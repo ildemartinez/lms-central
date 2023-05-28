@@ -3,6 +3,7 @@ export interface LMSBasicDto {
   id: number;
   name: string;
   url: string;
+  autoconnect: boolean;
 }
 
 export interface LMSDto extends LMSBasicDto {

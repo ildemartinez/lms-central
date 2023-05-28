@@ -1,22 +1,56 @@
 {
 	"info": {
-		"_postman_id": "f6f98a9f-6ce9-4d3d-a07c-bccf9a24965b",
+		"_postman_id": "ec324d65-1a24-4481-a242-3033775a4cce",
 		"name": "lms-central",
-		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "9518133"
 	},
 	"item": [
 		{
-			"name": "test",
+			"name": "/",
 			"request": {
 				"method": "GET",
 				"header": [],
 				"url": {
-					"raw": "{{host}}/",
+					"raw": "{{apihost}}",
 					"host": [
-						"{{host}}"
+						"{{apihost}}"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "categories from a LMS",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{apihost}}/categories/1",
+					"host": [
+						"{{apihost}}"
 					],
 					"path": [
-						""
+						"categories",
+						"1"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "courses from a LMS",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{apihost}}/courses/6",
+					"host": [
+						"{{apihost}}"
+					],
+					"path": [
+						"courses",
+						"6"
 					]
 				}
 			},

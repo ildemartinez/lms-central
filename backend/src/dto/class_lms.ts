@@ -9,6 +9,7 @@ export class LMS implements LMSDto {
   password: string;
   service: string;
   token: string;
+  autoconnect: boolean;
 
   constructor(
     id: number,
@@ -17,6 +18,7 @@ export class LMS implements LMSDto {
     user: string,
     password: string,
     service: string,
+    autoconnect: boolean,
   ) {
     this.id = id;
     this.name = name;
@@ -24,8 +26,14 @@ export class LMS implements LMSDto {
     this.user = user;
     this.password = password;
     this.service = service;
+    this.autoconnect = autoconnect;
   }
   connect(): boolean {
+    if (this.autoconnect == false) {
+      console.log(`${this.url} autconnect = false`);
+      return false;
+    }
+
     const myFetch = `${this.url}/login/token.php?username=${this.user}&password=${this.password}&service=${this.service}`;
 
     console.log(`Trying to connect ${this.url}`);
